@@ -1,6 +1,13 @@
 <?php
 
 class FormatoVisitaController{
+	
+	/******************** 
+	
+	En resumen el código genera un PDF unificado de la vista, opcionalmente lo guarda y registra en el sistema o en base de datos, y finalmente lo envía al usuario para descarga o visualización. 
+	
+	**********************/
+	
 
     /* Genera el PDF único del Formato de Visita, registra y lo entrega al navegador.*/
     public function generarFormatoVisita($rutaFormato, $cod_solicitud_credito, $infoAdicional, $cargaDoc = 0){
@@ -120,4 +127,3 @@ class FormatoVisitaController{
 }
 
 
-// En resumen el código genera un PDF unificado de la visita, opcionalmente lo guarda y registra en el sistema o en base de datos, y finalmente lo envía al usuario para descarga o visualización.
