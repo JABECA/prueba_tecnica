@@ -1,0 +1,45 @@
+{
+  "info": {
+    "name": "Laravel Viajes API",
+    "_postman_id": "6a42d6e9-fc3c-4a94-9f02-bfd64b4b21df",
+    "description": "Colección para probar la API de viajes por placa en Laravel con autenticación por API Key.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Consultar viajes por placa",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "X-API-KEY",
+            "value": "{{api_key}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/vehiculos/{{placa}}/viajes?desde={{desde}}&hasta={{hasta}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "vehiculos", "{{placa}}", "viajes"],
+          "query": [
+            { "key": "desde", "value": "{{desde}}" },
+            { "key": "hasta", "value": "{{hasta}}" }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000" },
+    { "key": "api_key", "value": "TU_API_KEY_AQUI" },
+    { "key": "placa", "value": "BBB456" },
+    { "key": "desde", "value": "2025-09-01" },
+    { "key": "hasta", "value": "2025-10-31" }
+  ]
+}

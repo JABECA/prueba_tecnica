@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "ab373011-7bfc-466c-83bc-d868be04ec26",
+		"name": "2. Prueba Tecnica P&S",
+		"description": "Colección para probar la API Laravel de viajes con autenticación por API Key.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "4803759"
+	},
+	"item": [
+		{
+			"name": "GET -2.1 Consultar viajes por placa",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "X-API-KEY",
+						"value": "{{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/vehiculos/{{placa}}/viajes?desde={{desde}}&hasta={{hasta}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vehiculos",
+						"{{placa}}",
+						"viajes"
+					],
+					"query": [
+						{
+							"key": "desde",
+							"value": "{{desde}}"
+						},
+						{
+							"key": "hasta",
+							"value": "{{hasta}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST -2.2 Crear nuevo viaje",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-API-KEY",
+						"value": "{{api_key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idcarro\": 1,\n  \"idciudad_origen\": 2,\n  \"idciudad_destino\": 3,\n  \"tiempo_horas\": 8,\n  \"fecha\": \"2025-10-29 17:23:54\"\n}"
+				},
+				"url": "{{base_url}}/api/v1/viajes",
+				"description": "Crea un nuevo registro de viaje verificando la existencia de carro y ciudades."
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH -2.3 Actualizar color del vehículo por placa",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-API-KEY",
+						"value": "{{api_key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"color\": \"Rojo\"\n}"
+				},
+				"url": "{{base_url}}/api/v1/vehiculos/{{placa}}/color",
+				"description": "Actualiza el color de un vehículo existente por su placa."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000"
+		},
+		{
+			"key": "api_key",
+			"value": "aq9qQTtKLydwAYhri30gewh97gCASIGuujsgv6WU"
+		},
+		{
+			"key": "placa",
+			"value": "CCC789"
+		},
+		{
+			"key": "desde",
+			"value": "2025-09-01"
+		},
+		{
+			"key": "hasta",
+			"value": "2025-10-31"
+		}
+	]
+}

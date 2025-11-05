@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "25010d8b-4cf6-425f-bcdb-d1046aaee8c8",
+		"name": "Api prueba tecnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "4803759"
+	},
+	"item": [
+		{
+			"name": "2.1 Consultar los viajes de un vehículo por placa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost/api_prueba_tecnica/public/vehiculos/BBB456/viajes"
+			},
+			"response": []
+		},
+		{
+			"name": "2.2 Crear viajes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"vehiculo_id\": 1,\r\n  \"ciudad_origen_id\": 1,\r\n  \"ciudad_destino_id\": 2,\r\n  \"tiempo_min\": 95,\r\n  \"fecha\": \"2025-10-08\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost/api_prueba_tecnica/public/viajes"
+			},
+			"response": []
+		},
+		{
+			"name": "2.3 Actualizar el color de un vehículo por placa",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"color\": \"Verde\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost/api_prueba_tecnica/public/vehiculos/BBB456/color"
+			},
+			"response": []
+		}
+	]
+}

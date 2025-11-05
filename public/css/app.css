@@ -1,0 +1,179 @@
+ :root{
+      --c-azul:#009EE0;        /* principal */
+      --c-azul-osc:#102A83;    /* secundario */
+      --c-blanco:#fff;
+      --header-h:60px;
+      --sidebar-w:220px;       /* ancho fijo sensato en escritorio */
+      --radius:12px;
+    }
+
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial; background:#f7f9fc; }
+
+    /* ===== Header fijo ===== */
+    header{
+      position:fixed; inset:0 0 auto 0; height:var(--header-h);
+      background:var(--c-azul-osc); color:var(--c-blanco);
+      display:flex; align-items:center; gap:10px;
+      padding:0 16px; z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,.15);
+    }
+    header .brand{ font-weight:700; letter-spacing:.3px; }
+
+    /* Hamburguesa (solo móvil) */
+    .btn-burger{
+      background:transparent; border:none; color:#fff; font-size:20px; cursor:pointer;
+      display:none; align-items:center; justify-content:center; width:36px; height:36px;
+    }
+
+    /* ===== Layout escritorio  ===== */
+    .layout{
+      display:grid;
+      grid-template-columns: var(--sidebar-w) 1fr; /* sidebar fijo; contenido ocupa el resto */
+      margin-top:var(--header-h);
+      min-height:calc(100vh - var(--header-h));
+      column-gap:0;
+    }
+
+    /* ===== Sidebar ===== */
+    aside{
+      position:sticky; top:var(--header-h);
+      background:var(--c-azul); color:#fff;
+      height:calc(100vh - var(--header-h));
+      z-index:900;
+      /* ancho fijo */
+      width:var(--sidebar-w);
+    }
+    .sidebar{ padding:20px 12px; }
+    .sidebar .brand{ font-weight:700; margin-bottom:18px; }
+
+    /* Enlaces del menú */
+    .sidebar .nav-link{
+      display:flex; align-items:center; gap:8px;
+      color:#fff; text-decoration:none;
+      padding:10px 14px; border-radius:12px;
+      transition: background-color .22s ease, transform .12s ease, box-shadow .22s ease;
+      margin-bottom:10px;
+    }
+    .sidebar .nav-link:hover{
+      background:#0b8fc6; transform:translateX(2px);
+      box-shadow:0 6px 14px rgba(16,42,131,.18);
+    }
+    .sidebar .nav-link.active{
+      background:#102A83; box-shadow:0 6px 14px rgba(16,42,131,.28);
+    }
+
+    /* ===== Contenido ===== */
+    main{ padding:20px; }
+    .card{ background:#fff; border-radius:14px; box-shadow:0 4px 12px rgba(16,42,131,.08); padding:16px; }
+
+    .btn{ display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none; border:none; cursor:pointer; font-weight:600; color:#fff; }
+    .btn-primary{ background:var(--c-azul); }
+    .btn-secondary{ background:var(--c-azul-osc); }
+    .btn-danger{ background:#e02424; }
+
+    table.dataTable thead th{ background:#eef5ff; }
+    .flash{ padding:10px 12px; border-radius:10px; margin-bottom:12px; background:#e8fff4; color:#0f5132; }
+
+    /* Badges */
+    .badge{ display:inline-block; padding:4px 10px; border-radius:8px; font-size:.8rem; font-weight:600; color:#fff; }
+    .badge-success{ background:#00b15e; }
+    .badge-danger{ background:#e02424; }
+    .badge-warning{ background:#ff9800; }
+    .badge-secondary{ background:#102A83; }
+
+    /* Tablas: si la pantalla es angosta, permitir scroll horizontal */
+    .table-responsive{ width:100%; overflow:auto; }
+
+    /* ===== Overlay solo móvil ===== */
+    .overlay{ display:none; }
+
+
+    /* DataTables length select: evita que la flecha se superponga al número */
+    .dataTables_wrapper .dataTables_length label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dataTables_wrapper .dataTables_length select {
+      min-width: 72px;         /* da más espacio al número */
+      height: 32px;
+      line-height: 32px;
+      padding: 0 22px 0 10px;  
+      border: 1px solid #cfd8e3;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    /* Espaciado entre formulario y botones */
+    form .btn,
+    form button.btn,
+    form a.btn {
+      margin-top: 10px; /* separa ligeramente los botones */
+    }
+
+    form .btn + .btn {
+      margin-left: 6px; /* espacio horizontal entre los botones */
+    }
+
+    /* ===== Móvil: sidebar off-canvas ===== */
+    @media (max-width:900px){
+      .btn-burger{ display:inline-flex; }
+      .layout{ grid-template-columns:1fr; }
+
+      aside{
+        position:fixed; 
+        top:var(--header-h); 
+        left:0;
+        width:min(85vw,260px);
+        height:auto; /* ✅ usa la nueva unidad dinámica que toma toda la altura del viewport visible */
+        transform:translateX(-110%);
+        transition:transform .25s ease;
+        box-shadow:12px 0 24px rgba(0,0,0,.18);
+      }
+      body.sidebar-open aside{ transform:translateX(0); }
+
+      .overlay{
+        display:block;
+        position:fixed; inset:var(--header-h) 0 0 0;
+        background:rgba(0,0,0,.25);
+        opacity:0; visibility:hidden;
+        transition:opacity .2s ease, visibility .2s ease;
+        z-index:850;
+      }
+      body.sidebar-open .overlay{ opacity:1; visibility:visible; }
+
+      main{ padding:14px; }
+      .card{ padding:14px; }
+    }
+
+
+   /* Grid de filtros */
+.filters{
+  display:grid;
+  gap:12px;
+  /* 3 columnas cómodas en escritorio, 1–2 en pantallas pequeñas */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  align-items:end;
+}
+.filters .filter-item label{display:block;font-weight:600;margin-bottom:6px;}
+.filters .input{
+  width:100%;height:36px;border:1px solid #cfd8e3;border-radius:8px;padding:0 10px;background:#fff;
+}
+
+/* --- Rango de fechas: ocupa SIEMPRE toda la fila --- */
+.filters .range-item{ grid-column: 1 / -1; }           /* se extiende a todo el ancho del grid */
+
+/* Contenido interno del rango */
+.range-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;         /* en móvil se apilan sin scroll */
+}
+.range-row .input{ flex:1 1 180px; min-width:160px; }
+.range-row .btn{ height:36px; white-space:nowrap; }
+
+/* En pantallas muy angostas, inputs a ancho completo */
+@media (max-width: 480px){
+  .range-row .input{ flex:1 1 100%; }
+  .range-row .btn{ width:100%; }
+}
